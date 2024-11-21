@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background-color: #333;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #575757;
+        }
+        .container {
+            margin: 2rem auto;
+            max-width: 800px;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .room {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        .room h3 {
+            margin: 0 0 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+        form {
+            margin-top: 1rem;
+        }
+        form label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+        form input, form select, form button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Hotel Booking</h1>
+    </header>
+    <nav>
+        <a href="#rooms">Rooms</a>
+        <a href="#booking">Book Now</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="container">
+        <h2 id="rooms">Room Types</h2>
+        <div class="room">
+            <h3>Deluxe Room</h3>
+            <p>Price: $150 per night</p>
+        </div>
+        <div class="room">
+            <h3>Standard Room</h3>
+            <p>Price: $100 per night</p>
+        </div>
+        <div class="room">
+            <h3>Suite</h3>
+            <p>Price: $250 per night</p>
+        </div>
+
+        <h2 id="booking">Book a Room</h2>
+        <form id="bookingForm">
+            <label for="roomType">Room Type:</label>
+            <select id="roomType" name="roomType" required>
+                <option value="deluxe">Deluxe Room</option>
+                <option value="standard">Standard Room</option>
+                <option value="suite">Suite</option>
+            </select>
+            <label for="date">Booking Date:</label>
+            <input type="date" id="date" name="date" required>
+            <button type="submit">Check Availability</button>
+        </form>
+        <p id="result"></p>
+
+        <h2 id="contact">Contact Us</h2>
+        <p>Email: support@hotelbooking.com</p>
+        <p>Phone: +123-456-7890</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Hotel Booking. All Rights Reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const roomType = document.getElementById('roomType').value;
+            const date = document.getElementById('date').value;
+
+            if (roomType && date) {
+                document.getElementById('result').textContent = `Room available! Type: ${roomType}, Date: ${date}`;
+            } else {
+                document.getElementById('result').textContent = "Please fill out all fields.";
+            }
+        });
+    </script>
+</body>
+</html>

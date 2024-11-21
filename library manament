@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #3A3A8A;
+            color: white;
+            text-align: center;
+            padding: 1rem 2rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            margin: 2rem auto;
+            max-width: 900px;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-top: 1rem;
+        }
+        form label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+        form input, form select, form button, form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #3A3A8A;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #2F2F7F;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 0.5rem;
+        }
+        table th {
+            background-color: #444;
+            color: white;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Library Management System</h1>
+    </header>
+    <nav>
+        <a href="#librarian">Librarian</a>
+        <a href="#user">Student</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+        <!-- Librarian Section -->
+        <h2 id="librarian">Librarian Admin Panel</h2>
+        <form id="librarianLogin">
+            <label for="librarianUsername">Username:</label>
+            <input type="text" id="librarianUsername" placeholder="Enter librarian username" required>
+            <label for="librarianPassword">Password:</label>
+            <input type="password" id="librarianPassword" placeholder="Enter librarian password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="librarianPanel" style="display: none;">
+            <h3>Manage Books</h3>
+            <form id="addBook">
+                <label for="bookName">Book Name:</label>
+                <input type="text" id="bookName" placeholder="Enter book name" required>
+                <label for="authorName">Author:</label>
+                <input type="text" id="authorName" placeholder="Enter author name" required>
+                <button type="submit">Add Book</button>
+            </form>
+            <h3>Book List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList"></tbody>
+            </table>
+        </div>
+
+        <!-- User Section -->
+        <h2 id="user">Student Panel</h2>
+        <form id="userLogin">
+            <label for="userEmail">Email:</label>
+            <input type="email" id="userEmail" placeholder="Enter your email" required>
+            <label for="userPassword">Password:</label>
+            <input type="password" id="userPassword" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="userPanel" style="display: none;">
+            <h3>Search Books</h3>
+            <form id="searchBook">
+                <label for="searchQuery">Search:</label>
+                <input type="text" id="searchQuery" placeholder="Enter book name or author">
+                <button type="submit">Search</button>
+            </form>
+            <div id="searchResults"></div>
+        </div>
+
+        <!-- Contact Section -->
+        <h2 id="contact">Contact Us</h2>
+        <p>Email: librarysupport@example.com</p>
+        <p>Phone: +123-456-7890</p>
+    </div>
+    <footer>
+        <p style="text-align: center;">&copy; 2024 Library Management System</p>
+    </footer>
+
+    <script>
+        // Librarian Login
+        document.getElementById('librarianLogin').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('librarianPanel').style.display = 'block';
+            alert('Librarian logged in successfully!');
+        });
+
+        // Add Book
+        document.getElementById('addBook').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const bookName = document.getElementById('bookName').value;
+            const authorName = document.getElementById('authorName').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${bookName}</td>
+                <td>${authorName}</td>
+                <td><button onclick="deleteBook(this)">Delete</button></td>
+            `;
+            document.getElementById('bookList').appendChild(row);
+            alert('Book added successfully!');
+        });
+
+        // Delete Book
+        function deleteBook(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+            alert('Book deleted successfully!');
+        }
+
+        // Student Login
+        document.getElementById('userLogin').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('userPanel').style.display = 'block';
+            alert('Student logged in successfully!');
+        });
+
+        // Search Books
+        document.getElementById('searchBook').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+            const results = document.querySelectorAll('#bookList tr');
+            let resultText = '<h4>Search Results:</h4><ul>';
+            results.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const bookName = cells[0].textContent.toLowerCase();
+                const authorName = cells[1].textContent.toLowerCase();
+                if (bookName.includes(query) || authorName.includes(query)) {
+                    resultText += `<li>${cells[0].textContent} by ${cells[1].textContent}</li>`;
+                }
+            });
+            resultText += '</ul>';
+            document.getElementById('searchResults').innerHTML = resultText;
+        });
+    </script>
+</body>
+</html>

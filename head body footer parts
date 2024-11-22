@@ -1,0 +1,30 @@
+<!Doctype html>
+<html>
+<head>
+    <title>My web page</title>
+    <style>
+          h1{
+              color:purple;
+}
+             p{
+                color:pink;
+}
+</style>
+  <script>
+        function message() {
+            alert("Welcome to the webpage!");
+        }
+    </script>
+</head>
+<body>
+<center>
+   <h1>Header Content</h1>
+   <p>This is an example webpage</p>
+   <button onclick="message()">click me</button>
+</center>
+</body>
+<footer>
+    <p>Footer content</p>
+</footer>
+  
+</html>

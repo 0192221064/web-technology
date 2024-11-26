@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Number Operations</title>
+    <script>
+        function calculateExponential() {
+            let base = parseFloat(document.getElementById('base').value);
+            let exp = parseInt(document.getElementById('exponent').value);
+            document.getElementById('resultExponential').textContent = Math.pow(base, exp);
+        }
+
+        function limitDecimal() {
+            let num = parseFloat(document.getElementById('number').value);
+            let digits = parseInt(document.getElementById('digits').value);
+            document.getElementById('resultDecimal').textContent = num.toFixed(digits);
+        }
+
+        function numberToString() {
+            let num = parseFloat(document.getElementById('numToString').value);
+            document.getElementById('resultString').textContent = num.toString();
+        }
+
+        function getNegativeInfinity() {
+            document.getElementById('resultNegativeInfinity').textContent = Number.NEGATIVE_INFINITY;
+        }
+    </script>
+</head>
+<body>
+    <h1>JavaScript Number Operations</h1>
+    <div>
+        <h3>Exponential Value</h3>
+        <label>Base: <input type="number" id="base"></label><br>
+        <label>Exponent: <input type="number" id="exponent"></label><br>
+        <button onclick="calculateExponential()">Calculate</button>
+        <p>Result: <span id="resultExponential"></span></p>
+    </div>
+
+    <div>
+        <h3>Limit Digits After Decimal</h3>
+        <label>Number: <input type="number" id="number"></label><br>
+        <label>Digits: <input type="number" id="digits"></label><br>
+        <button onclick="limitDecimal()">Apply</button>
+        <p>Result: <span id="resultDecimal"></span></p>
+    </div>
+
+    <div>
+        <h3>Convert Number to String</h3>
+        <label>Number: <input type="number" id="numToString"></label><br>
+        <button onclick="numberToString()">Convert</button>
+        <p>Result: <span id="resultString"></span></p>
+    </div>
+
+    <div>
+        <h3>Return Negative Infinity</h3>
+        <button onclick="getNegativeInfinity()">Get Negative Infinity</button>
+        <p>Result: <span id="resultNegativeInfinity"></span></p>
+    </div>
+</body>
+</html>
